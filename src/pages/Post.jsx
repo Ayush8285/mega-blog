@@ -12,15 +12,16 @@ export default function Post() {
     const navigate = useNavigate();
 
     const userData = useSelector((state) => state.auth.userData);
-
     const isAuthor = post && userData ? post.userId === userData.$id : false;
 
     useEffect(() => {
         if (slug) {
-            appwriteService.getPost(slug).then((post) => {
-                if (post) setPost(post);
-                else navigate("/");
-            });
+            appwriteService.getPost(slug)
+                .then((post) => {
+                    if (post) setPost(post);
+                    else navigate("/");
+                })
+                .catch(() => navigate("/"));
         } else navigate("/");
     }, [slug, navigate]);
 
@@ -34,35 +35,47 @@ export default function Post() {
     };
 
     return post ? (
-        <div className="py-8">
+        <div className="py-10 min-h-screen bg-gradient-to-br from-purple-200 via-white to-blue-200">
             <Container>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
-                    <img
-                        src={appwriteService.getFilePreview(post.featuredImage)}
-                        alt={post.title}
-                        className="rounded-xl"
-                    />
-
-                    {isAuthor && (
-                        <div className="absolute right-6 top-6">
-                            <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3">
-                                    Edit
+                <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-xl overflow-hidden">
+                    <div className="relative">
+                        <img
+                            src={appwriteService.getFileView(post.featuredImage)}
+                            alt={post.title}
+                            className="w-full h-[300px] object-contain transition-transform duration-300 hover:scale-105"
+                        />
+                        {isAuthor && (
+                            <div className="absolute right-4 top-4 flex gap-2">
+                                <Link to={`/edit-post/${post.$id}`}>
+                                    <Button bgColor="bg-green-500" className="hover:bg-green-600">
+                                        Edit
+                                    </Button>
+                                </Link>
+                                <Button
+                                    bgColor="bg-red-500"
+                                    className="hover:bg-red-600"
+                                    onClick={deletePost}
+                                >
+                                    Delete
                                 </Button>
-                            </Link>
-                            <Button bgColor="bg-red-500" onClick={deletePost}>
-                                Delete
-                            </Button>
-                        </div>
-                    )}
-                </div>
-                <div className="w-full mb-6">
-                    <h1 className="text-2xl font-bold">{post.title}</h1>
-                </div>
-                <div className="browser-css">
-                    {parse(post.content)}
+                            </div>
+                        )}
                     </div>
+
+                    <div className="px-6 py-8">
+                        <h1 className="text-3xl font-bold mb-4 text-gray-800 text-center">
+                            {post.title}
+                        </h1>
+                        <div className="text-gray-700 leading-relaxed prose prose-sm sm:prose lg:prose-lg max-w-none">
+                            {parse(post.content)}
+                        </div>
+                    </div>
+                </div>
             </Container>
         </div>
-    ) : null;
+    ) : (
+        <div className="min-h-screen flex items-center justify-center text-gray-500">
+            Loading post...
+        </div>
+    );
 }
