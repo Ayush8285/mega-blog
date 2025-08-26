@@ -7,7 +7,8 @@ import topic from "../assets/topic.png";
 import community from "../assets/community.png";
 import blog from "../assets/blog-illustration.avif";
 import about from "../assets/about.avif";
-import { useSelector } from "react-redux"; // Make sure this is at the top
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom"; // ✅ import Link
 
 function Home() {
   const [posts, setPosts] = useState([]);
@@ -53,23 +54,23 @@ function Home() {
               Discover and share knowledge through beautifully written articles.
               Create, read, and engage — all in one place.
             </p>
-            {/* Hero Section Button */}
-{authStatus ? (
-  <a
-    href="/add-post"
-    className="inline-block bg-purple-600 text-white text-lg font-medium px-8 py-3 rounded-md hover:bg-purple-700 transition-all duration-300 shadow-md"
-  >
-    Write a Post
-  </a>
-) : (
-  <a
-    href="/signup"
-    className="inline-block bg-purple-600 text-white text-lg font-medium px-8 py-3 rounded-md hover:bg-purple-700 transition-all duration-300 shadow-md"
-  >
-    Get Started
-  </a>
-)}
 
+            {/* Hero Section Button */}
+            {authStatus ? (
+              <Link
+                to="/add-post"
+                className="inline-block bg-purple-600 text-white text-lg font-medium px-8 py-3 rounded-md hover:bg-purple-700 transition-all duration-300 shadow-md"
+              >
+                Write a Post
+              </Link>
+            ) : (
+              <Link
+                to="/signup"
+                className="inline-block bg-purple-600 text-white text-lg font-medium px-8 py-3 rounded-md hover:bg-purple-700 transition-all duration-300 shadow-md"
+              >
+                Get Started
+              </Link>
+            )}
           </div>
 
           {/* Image / Illustration */}
@@ -98,7 +99,6 @@ function Home() {
               with ease.
             </p>
 
-            {/* Optional Image / Illustration */}
             <img
               src={about}
               alt="About illustration"
@@ -185,23 +185,23 @@ function Home() {
             Create your first post, share your voice, and inspire the world
             through your words.
           </p>
-          {/* Call to Action Button */}
-{authStatus ? (
-  <button
-    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-    className="inline-block cursor-pointer bg-white text-purple-700 font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg hover:bg-purple-100 transition duration-300"
-  >
-    🚀 Get Started
-  </button>
-) : (
-  <a
-    href="/signup"
-    className="inline-block bg-white text-purple-700 font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg hover:bg-purple-100 transition duration-300"
-  >
-    🚀 Get Started
-  </a>
-)}
 
+          {/* Call to Action Button */}
+          {authStatus ? (
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="inline-block cursor-pointer bg-white text-purple-700 font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg hover:bg-purple-100 transition duration-300"
+            >
+              🚀 Get Started
+            </button>
+          ) : (
+            <Link
+              to="/signup"
+              className="inline-block bg-white text-purple-700 font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg hover:bg-purple-100 transition duration-300"
+            >
+              🚀 Get Started
+            </Link>
+          )}
         </div>
       </section>
     </div>
