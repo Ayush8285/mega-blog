@@ -34,7 +34,7 @@ function Home() {
     },
     {
       title: "💬 Community Engagement",
-      text: "Like, comment, and follow your favorite authors.",
+      text: "Read each other blogs",
       img: community,
     },
   ];
@@ -53,12 +53,23 @@ function Home() {
               Discover and share knowledge through beautifully written articles.
               Create, read, and engage — all in one place.
             </p>
-            <a
-              href="/signup"
-              className="inline-block bg-purple-600 text-white text-lg font-medium px-8 py-3 rounded-md hover:bg-purple-700 transition-all duration-300 shadow-md"
-            >
-              Get Started
-            </a>
+            {/* Hero Section Button */}
+{authStatus ? (
+  <a
+    href="/add-post"
+    className="inline-block bg-purple-600 text-white text-lg font-medium px-8 py-3 rounded-md hover:bg-purple-700 transition-all duration-300 shadow-md"
+  >
+    Write a Post
+  </a>
+) : (
+  <a
+    href="/signup"
+    className="inline-block bg-purple-600 text-white text-lg font-medium px-8 py-3 rounded-md hover:bg-purple-700 transition-all duration-300 shadow-md"
+  >
+    Get Started
+  </a>
+)}
+
           </div>
 
           {/* Image / Illustration */}
@@ -174,12 +185,23 @@ function Home() {
             Create your first post, share your voice, and inspire the world
             through your words.
           </p>
-          <a
-            href="/signup"
-            className="inline-block bg-white text-purple-700 font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg hover:bg-purple-100 transition duration-300"
-          >
-            🚀 Get Started
-          </a>
+          {/* Call to Action Button */}
+{authStatus ? (
+  <button
+    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+    className="inline-block cursor-pointer bg-white text-purple-700 font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg hover:bg-purple-100 transition duration-300"
+  >
+    🚀 Get Started
+  </button>
+) : (
+  <a
+    href="/signup"
+    className="inline-block bg-white text-purple-700 font-semibold px-8 py-3 rounded-full shadow-md hover:shadow-lg hover:bg-purple-100 transition duration-300"
+  >
+    🚀 Get Started
+  </a>
+)}
+
         </div>
       </section>
     </div>

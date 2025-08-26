@@ -97,7 +97,7 @@ export default function PostForm({ post }) {
           className="mb-4"
           {...register("title", { required: "Title is required" })}
         />
-        {errors.title && <p className="text-red-500 text-sm mb-2">{errors.title.message}</p>}
+        {errors.title && <p className="text-red-600 text-sm mb-2">{errors.title.message}</p>}
 
         <Input
           label="Slug :"
@@ -108,7 +108,7 @@ export default function PostForm({ post }) {
             setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
           }}
         />
-        {errors.slug && <p className="text-red-500 text-sm mb-2">{errors.slug.message}</p>}
+        {errors.slug && <p className="text-red-600 text-sm mb-2">{errors.slug.message}</p>}
 
         <RTE
           label="Content :"
@@ -123,12 +123,12 @@ export default function PostForm({ post }) {
         <Input
           label="Featured Image :"
           type="file"
-          className="mb-4"
+          className="mb-4 cursor-pointer"
           accept="image/png, image/jpg, image/jpeg, image/gif"
           {...register("image", { required: !post })}
         />
         {!post && errors.image && (
-          <p className="text-red-500 text-sm mb-2">Image is required</p>
+          <p className="text-red-600 text-sm mb-2">Image is required</p>
         )}
 
         {post && (
@@ -136,7 +136,7 @@ export default function PostForm({ post }) {
             <img
               src={appwriteService.getFileView(post.featuredImage)}
               alt={post.title}
-              className="rounded-lg max-h-48 w-full object-cover"
+              className="rounded-lg max-h-48 w-full object-cover "
               onError={(e) => (e.target.style.display = "none")}
             />
           </div>
@@ -148,13 +148,13 @@ export default function PostForm({ post }) {
           className="mb-4"
           {...register("status", { required: "Status is required" })}
         />
-        {errors.status && <p className="text-red-500 text-sm mb-2">{errors.status.message}</p>}
+        {errors.status && <p className="text-red-600 text-sm mb-2">{errors.status.message}</p>}
 
         <Button
           type="submit"
           disabled={loading}
           bgColor={post ? "bg-green-500" : undefined}
-          className={`w-full ${loading ? "opacity-70 cursor-not-allowed" : ""}`}
+          className={`w-full ${loading ? "opacity-70 cursor-not-allowed" : "cursor-pointer"}`}
         >
           {loading ? "Processing..." : post ? "Update Post" : "Create Post"}
         </Button>

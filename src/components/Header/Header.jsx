@@ -49,7 +49,7 @@ function Header() {
                         navigate(item.slug)
                         setMenuOpen(false)
                       }}
-                      className='w-full text-left md:text-center px-4 py-3 md:py-2 text-base md:text-lg rounded-md hover:bg-blue-200 transition duration-200 font-medium'
+                      className='w-full text-left md:text-center px-4 py-3 md:py-2 text-base md:text-lg rounded-md hover:bg-blue-200 transition duration-200 font-medium cursor-pointer'
                     >
                       {item.name}
                     </button>
