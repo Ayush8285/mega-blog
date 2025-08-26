@@ -69,6 +69,10 @@ App will be running at: `http://localhost:5173`
 * `npm run lint` – Lint the project
 
 
+## 🚀 Live URL
+
+- Frontend: [Vercel URL](https://blog-appwrite-delta.vercel.app/)
+
 ## 🤝 Contributing
 
 Pull requests are welcome! Please open an issue first to discuss changes.
